@@ -4,7 +4,7 @@ FROM python:3.10-slim
 # 设置维护者信息
 LABEL maintainer="admin@archu.org"
 
-# 暴露容器的端口，这里映射到宿主机的7000端口
+# 暴露容器的端口，这里映射到宿主机的5000端口
 EXPOSE 5000
 
 # 阻止 Python 生成 .pyc 文件
@@ -25,5 +25,5 @@ WORKDIR /app
 # 复制当前目录下的所有文件到容器的 /app 目录
 COPY . /app
 
-# 定义容器启动时的默认命令，启动app.py，监听在 0.0.0.0 地址上的 8000 端口
+# 定义容器启动时的默认命令，启动app.py，监听在 0.0.0.0 地址上的 5000 端口
 CMD ["python", "app.py", "--host", "0.0.0.0"]
