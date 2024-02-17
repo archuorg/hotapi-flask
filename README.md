@@ -2,7 +2,11 @@
 ## 热点api集合
  [示例页面](http://hot.archu.org)
 
-## docker配置
+## 配置
+```angular2html
+根目录下`config.py`
+```
+## Docker配置
 ```angular2html
 # 拉取源码
 git clone https://github.com/archuorg/hotapi-flask.git

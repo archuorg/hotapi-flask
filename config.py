@@ -1,8 +1,8 @@
 class Config:
-    # 访问数
+    # 访问数文件存放目录
     VISIT_COUNT_DATA_DEST = 'static/visit_count.data'
 
-    # API字典
+    # API字典，api模块名称与中文名一一对应，用于前端Jinja2渲染与排序
     APIS = {
         "zhihu": "知乎",
         "weibo": "微博",
