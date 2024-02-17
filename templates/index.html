@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archu热榜 - 你爱的，才是热榜！</title>
+    <script src="/static/layui/layui.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2MMZD4NDQK"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-2MMZD4NDQK');</script>
+    <link rel="icon" href="/static/img/favicon.png" />
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/webkit.css">
+</head>
+
+<body>
+
+<!-- 导航栏 -->
+<ul class="layui-nav layui-bg-blue">
+  <div class="layui-row">
+    <div class="layui-col-md9">
+      <li class="layui-nav-item"><a href="/"><font color='#FFFFFF'><b>Archu热榜</b></font></a></li>
+      <li class="layui-nav-item layui-this"><a href="">精选</a></li>
+      <li class="layui-nav-item"><a href="http://www.archu.org">博客</a></li>
+      <li class="layui-nav-item"><a href="http://chovy.eu.org">小店</a></li>
+    </div>
+  </div>
+</ul>
+
+<!-- 遍历api -->
+<div style="padding: 15px; background-color: #F2F2F2;">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space10">
+            {% for api_name, api_data in data.items() %}
+            <div class="layui-col-md3">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <img class="sm-img" src="/static/img/{{ api_name }}.png">
+                        <font size="3" color="#393D49"><b>{{ dict[api_name] }}</b></font>
+                    </div>
+                    <div class="layui-card-body">
+                        <ul>
+                            {% for item in api_data %}
+                            {{ item|safe }}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<!-- 页脚 -->
+<div style="padding: 3px; background-color: #1E9FFF;">
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        <center><font color='#FFFFFF'><b>©2024 Archu热榜 hot.archu.org 👀<span id="visitCount">{{ visit_count }}</span> 联系邮箱：admin@archu.org</b> </font></center>
+        <!-- 底部固定区域 -->
+    </div>
+</div>
+</body>
+</html>
