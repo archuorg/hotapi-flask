@@ -13,7 +13,7 @@ def fetch_data():
             "coookie": "pac_uid=0_48b32310e472c; iip=0; _qimei_uuid42=18115002e341002fa0aade50be4c82a7ff5a5edf1f; _qimei_fingerprint=18f998bcb3d471c7d5965cb12f7cd8e1; _qimei_q36=; _qimei_h38=fdedf045a0aade50be4c82a702000000b18115; pgv_pvid=4126314992; fqm_pvqid=9dbed13a-c7b2-4127-b696-8416228caa5a; fqm_sessionid=e622ecfa-01b3-4fe0-bcaa-5505a33dfe2a; pgv_info=ssid=s6087019157; ts_last=y.qq.com/n/ryqq/toplist/4; ts_uid=5999908163",
             "authority": "y.qq.com",
             "referer": "https://www.google.com/",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "user-agent": helper.random_user_agent(),
         }
 
         url = "https://y.qq.com/n/ryqq/toplist/4"

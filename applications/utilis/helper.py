@@ -8,7 +8,6 @@ from lxml import etree
 import random
 import os
 import urllib3
-from config import Config
 
 
 
@@ -188,11 +187,11 @@ def get_history_data(filename, curr_month, curr_day):
 
 def get_visit_count():
     try:
-        with open(Config.VISIT_COUNT_DATA_DEST, 'r') as file:
+        with open('static/visit_count.data', 'r') as file:
             return int(file.read().strip())
     except FileNotFoundError:
         # 如果文件不存在，则返回默认值0
         return 0
 def set_visit_count(count):
-    with open(Config.VISIT_COUNT_DATA_DEST, 'w') as file:
+    with open('static/visit_count.data', 'w') as file:
         file.write(str(count))

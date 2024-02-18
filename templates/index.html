@@ -8,60 +8,422 @@
     <script src="/static/layui/layui.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2MMZD4NDQK"></script>
-    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-2MMZD4NDQK');</script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-2MMZD4NDQK');
+    </script>
+    <script src="/static/js/render.js"></script>
     <link rel="icon" href="/static/img/favicon.png" />
     <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <link rel="stylesheet" type="text/css" href="/static/css/webkit.css">
+
 </head>
 
 <body>
-
-<!-- 导航栏 -->
-<ul class="layui-nav layui-bg-blue">
-  <div class="layui-row">
-    <div class="layui-col-md9">
-      <li class="layui-nav-item"><a href="/"><font color='#FFFFFF'><b>Archu热榜</b></font></a></li>
-      <li class="layui-nav-item layui-this"><a href="">精选</a></li>
-      <li class="layui-nav-item"><a href="http://www.archu.org">博客</a></li>
-      <li class="layui-nav-item"><a href="http://chovy.eu.org">小店</a></li>
+    <!-- Loading animation -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
     </div>
-  </div>
-</ul>
 
-<!-- Jinja2 遍历api -->
-<div style="padding: 15px; background-color: #F2F2F2;">
+    <!-- 导航栏 -->
+    <ul class="layui-nav layui-bg-gray" lay-bar="enabled">
+      <li class="layui-nav-item"><a href="/"><img src="/static/img/favicon.png" alt="favicon" style="width: 32px; height: 32px;"></a></li>
+      <li class="layui-nav-item"><a href="http://www.archu.org"><font color='gray'><b>博客</b></font></a></li>
+      <li class="layui-nav-item"><a href="http://chovy.eu.org"><font color='gray'><b>小店</b></font></a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;"><font color='gray'><b>更多</b></font></a>
+        <dl class="layui-nav-child">
+          <dd><a href="">选项1</a></dd>
+          <dd><a href="">选项2</a></dd>
+          <dd><a href="">选项3</a></dd>
+        </dl>
+      </li>
+    </ul>
+
+
+    <!-- 第一行 -->
+<div style="padding: 15px; background-color: rgb(250, 250, 252);">
+    <div class="layui-fluid">
+      <div class="layui-row layui-col-space10">
+        <!-- 知乎 -->
+        <div class="layui-col-md3">
+          <div class="layui-card">
+            <div class="layui-card-header">
+              <img class="sm-img" src="/static/img/zhihu.png">
+              <font size="3" color="#393D49"><b> 知乎</b></font>
+            </div>
+            <div class="layui-card-body" id = "zhihucard">
+              <ul id="zhihu"></ul>
+            </div>
+          </div>
+        </div>
+        <!-- 微博 -->
+        <div class="layui-col-md3">
+          <div class="layui-card">
+            <div class="layui-card-header">
+              <img class="sm-img" src="/static/img/weibo.png">
+              <font size="3" color="#393D49"><b> 微博</b></font>
+            </div>
+            <div class="layui-card-body" id = "weibocard">
+              <ul id="weibo"></ul>
+            </div>
+          </div>
+        </div>
+        <!-- 百度 -->
+        <div class="layui-col-md3">
+            <div class="layui-card">
+              <div class="layui-card-header">
+                <img class="sm-img" src="/static/img/baidu.png">
+                <font size="3" color="#393D49"><b> 百度</b></font>
+              </div>
+              <div class="layui-card-body" id = "baiducard">
+                <ul id="baidu"></ul>
+              </div>
+            </div>
+        </div>
+        <!-- 贴吧 -->
+        <div class="layui-col-md3">
+            <div class="layui-card">
+              <div class="layui-card-header">
+                <img class="sm-img" src="/static/img/tieba.png">
+                <font size="3" color="#393D49"><b> 贴吧</b></font>
+              </div>
+              <div class="layui-card-body" id = "tiebacard">
+                <ul id="tieba"></ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+
+<!-- 第二行 -->
+<div style="padding: 15px; background-color: rgb(250, 250, 252);">
     <div class="layui-fluid">
         <div class="layui-row layui-col-space10">
-            {% for api_name, api_data in data.items() %}
+            <!-- 今日头条 -->
             <div class="layui-col-md3">
-                <div class="layui-card">
-                    <div class="layui-card-header">
-                        <img class="sm-img" src="/static/img/{{ api_name }}.png">
-                        <font size="3" color="#393D49"><b>{{ dict[api_name] }}</b></font>
-                    </div>
-                    <div class="layui-card-body">
-                        <ul>
-                            {% for item in api_data %}
-                            {{ item|safe }}
-                            {% endfor %}
-                        </ul>
-                    </div>
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/toutiao.png">
+                  <font size="3" color="#393D49"><b> 今日头条</b></font>
                 </div>
+                <div class="layui-card-body" id="toutiaocard">
+                  <ul id="toutiao"></ul>
+                </div>
+              </div>
             </div>
-            {% endfor %}
+            <!-- 腾讯新闻 -->
+            <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/txnews.png">
+                  <font size="3" color="#393D49"><b> 腾讯新闻</b></font>
+                </div>
+                <div class="layui-card-body" id="txnewscard">
+                  <ul id="txnews"></ul>
+                </div>
+              </div>
+            </div>
+            <!-- 网易新闻 -->
+            <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/neteasenews.png">
+                  <font size="3" color="#393D49"><b> 网易新闻</b></font>
+                </div>
+                <div class="layui-card-body" id="neteasenewscard">
+                  <ul id="neteasenews"></ul>
+                </div>
+              </div>
+            </div>
+            <!-- 澎湃新闻 -->
+            <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/thepaper.png">
+                  <font size="3" color="#393D49"><b> 澎湃新闻</b></font>
+                </div>
+                <div class="layui-card-body" id="thepapercard">
+                  <ul id="thepaper"></ul>
+                </div>
+              </div>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- 第三行 -->
+<div style="padding: 15px; background-color: rgb(250, 250, 252);">
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space10">
+         <!-- 36氪人气榜 -->
+          <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/36kr.png">
+                  <font size="3" color="#393D49"><b> 36氪人气榜</b></font>
+                </div>
+                <div class="layui-card-body" id = "krrenqicard">
+                  <ul id="krrenqi"></ul>
+                </div>
+              </div>
+          </div>
+          <!-- ithome -->
+          <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/ithome.png">
+                  <font size="3" color="#393D49"><b> it之家</b></font>
+                </div>
+                <div class="layui-card-body" id = "ithomecard">
+                  <ul id="ithome"></ul>
+                </div>
+              </div>
+          </div>
+          <!-- 稀土掘金 -->
+          <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/juejin.png">
+                  <font size="3" color="#393D49"><b> 稀土掘金</b></font>
+                </div>
+                <div class="layui-card-body" id = "juejincard">
+                  <ul id="juejin"></ul>
+                </div>
+              </div>
+          </div>
+          <!-- 少数派 -->
+          <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/sspai.png">
+                  <font size="3" color="#393D49"><b> 少数派</b></font>
+                </div>
+                <div class="layui-card-body" id = "3sspaicard">
+                  <ul id="sspai"></ul>
+                </div>
+              </div>
+          </div>
+    </div>
+  </div>
+</div>
 
-<!-- 页脚 -->
-<div style="padding: 3px; background-color: #1E9FFF;">
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        <center><font color='#FFFFFF'><b>©2024 Archu热榜 hot.archu.org 👀<span id="visitCount">{{ visit_count }}</span> 联系邮箱：admin@archu.org</b> </font></center>
-        <!-- 底部固定区域 -->
+<!-- 第四行 -->
+<div style="padding: 15px; background-color: rgb(250, 250, 252);">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space10">
+            <!-- CSDN热榜 -->
+            <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/csdn.png">
+                  <font size="3" color="#393D49"><b> CSDN热榜</b></font>
+                </div>
+                <div class="layui-card-body" id="csdncard">
+                  <ul id="csdn"></ul>
+                </div>
+              </div>
+            </div>
+            <!-- 虎扑热榜 -->
+            <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/hupu.png">
+                  <font size="3" color="#393D49"><b> 虎扑热榜</b></font>
+                </div>
+                <div class="layui-card-body" id="hupucard">
+                  <ul id="hupu"></ul>
+                </div>
+              </div>
+            </div>
+            <!-- 什么值得买热榜 -->
+            <div class="layui-col-md3">
+            <div class="layui-card">
+              <div class="layui-card-header">
+                <img class="sm-img" src="/static/img/smzdm.png">
+                <font size="3" color="#393D49"><b> 什么值得买热榜</b></font>
+              </div>
+              <div class="layui-card-body" id = "smzdmscard">
+                <ul id="smzdm"></ul>
+              </div>
+            </div>
+          </div>
+            <!-- 历史今天 -->
+            <div class="layui-col-md3">
+            <div class="layui-card">
+              <div class="layui-card-header">
+                <img class="sm-img" src="/static/img/history.png">
+                <font size="3" color="#393D49"><b> 历史今天</b></font>
+              </div>
+              <div class="layui-card-body" id = "historycard">
+                <ul id="history"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 </div>
+
+<!-- 第五行 -->
+<div style="padding: 15px; background-color: rgb(250, 250, 252);">
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space10">
+          <!-- 抖音热榜 -->
+          <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/douyin.png">
+                  <font size="3" color="#393D49"><b> 抖音热榜</b></font>
+                </div>
+                <div class="layui-card-body" id = "douyincard">
+                  <ul id="douyin"></ul>
+                </div>
+              </div>
+            </div>
+          <!-- B站热榜 -->
+          <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/bilibili.png">
+                  <font size="3" color="#393D49"><b> B站热榜</b></font>
+                </div>
+                <div class="layui-card-body" id="bilibilihotcard">
+                  <ul id="bilibilihot"></ul>
+                </div>
+              </div>
+            </div>
+          <!-- B站日榜 -->
+          <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/bilibili.png">
+                  <font size="3" color="#393D49"><b> B站日榜</b></font>
+                </div>
+                <div class="layui-card-body" id="bilibilidaycard">
+                  <ul id="bilibiliday"></ul>
+                </div>
+              </div>
+            </div>
+          <!-- A站热榜 -->
+          <div class="layui-col-md3">
+            <div class="layui-card">
+              <div class="layui-card-header">
+                <img class="sm-img" src="/static/img/acfun.png">
+                <font size="3" color="#393D49"><b> A站热榜</b></font>
+              </div>
+              <div class="layui-card-body" id="acfuncard">
+                <ul id="acfun"></ul>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+<!-- 第六行 -->
+<div style="padding: 15px; background-color: rgb(250, 250, 252);">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space10">
+            <!-- 果核剥壳 -->
+            <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/ghbk.png">
+                  <font size="3" color="#393D49"><b> 果核剥壳</b></font>
+                </div>
+                <div class="layui-card-body" id = "ghbkcard">
+                  <ul id="ghbk"></ul>
+                </div>
+              </div>
+            </div>
+            <!-- 吾爱破解 -->
+            <div class="layui-col-md3">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        <img class="sm-img" src="/static/img/wuai.png">
+                        <font size="3" color="#393D49"><b> 吾爱破解</b></font>
+                    </div>
+                    <div class="layui-card-body" id="wuaicard">
+                        <ul id="wuai"></ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 豆瓣新片 -->
+            <div class="layui-col-md3">
+                <div class="layui-card">
+                  <div class="layui-card-header">
+                    <img class="sm-img" src="/static/img/douban.png">
+                    <font size="3" color="#393D49"><b> 豆瓣新片榜</b></font>
+                  </div>
+                  <div class="layui-card-body" id="doubancard">
+                    <ul id="douban"></ul>
+                  </div>
+                </div>
+            </div>
+            <!-- QQ音乐流行榜 -->
+            <div class="layui-col-md3">
+                <div class="layui-card">
+                  <div class="layui-card-header">
+                    <img class="sm-img" src="/static/img/qqmusic.png">
+                    <font size="3" color="#393D49"><b> QQ音乐流行榜</b></font>
+                  </div>
+                  <div class="layui-card-body" id="qqmusiccard">
+                    <ul id="qqmusic"></ul>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 第七行 -->
+<div style="padding: 15px; background-color: rgb(250, 250, 252);">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space10">
+            <!-- 微信读书新书榜 -->
+            <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/weread.png">
+                  <font size="3" color="#393D49"><b> 微信读书新书榜</b></font>
+                </div>
+                <div class="layui-card-body" id = "wereadcard">
+                  <ul id="weread"></ul>
+                </div>
+              </div>
+            </div>
+            <!-- Github -->
+            <div class="layui-col-md3">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  <img class="sm-img" src="/static/img/github.png">
+                  <font size="3" color="#393D49"><b> Github</b></font>
+                </div>
+                <div class="layui-card-body" id = "githubcard">
+                  <ul id="github"></ul>
+                </div>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <!-- 页脚 -->
+    <div style="padding: 3px; background-color: rgb(250, 250, 252);">
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            <center><font color='black'>©2024 Archu热榜 hot.archu.org 👀<span id="visitCount">{{ visit_count }}</span> 联系邮箱：admin@archu.org </font></center>
+            <!-- 底部固定区域 -->
+        </div>
+    </div>
+
+<script src="/static/js/index.js"></script>
+
 </body>
+
 </html>

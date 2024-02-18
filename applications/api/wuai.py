@@ -12,7 +12,6 @@ def fetch_data():
             "Accept-Encoding": "gzip, deflate, br",
             "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
             "User-Agent": helper.random_user_agent(),
-            'Connection': 'close'
         }
 
         request = helper.get_html("https://www.52pojie.cn/forum.php?mod=guide&view=hot", headers, "html", proxy_ip=None) # 这里没有使用代理ip ：proxy_ip=None
