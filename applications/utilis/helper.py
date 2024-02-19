@@ -1,6 +1,7 @@
 import glob
 import re
 import time
+import pytz
 import requests
 import datetime
 import json
@@ -128,9 +129,12 @@ def get_file_data(filename):
 
 # json数据初始化
 def init_json_data(title):
+    # 确保获取的时间是基于本地时区
+    local_timezone = pytz.timezone('Asia/Shanghai')
+    local_time = datetime.datetime.now(local_timezone)
     if title == "err":
-        return {"secure": False, "title": "ERROR", "update_time": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-    return {"secure": True, "title": title, "update_time": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+        return {"secure": False, "title": "ERROR", "update_time": local_time.strftime("%Y-%m-%d %H:%M:%S")}
+    return {"secure": True, "title": title, "update_time": local_time.strftime("%Y-%m-%d %H:%M:%S")}
 
 # data_list 赋值
 def headle_html_data_list(datas, url_prefix="", hot_prefix=None):

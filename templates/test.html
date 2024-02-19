@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archu热榜 - 你爱的，才是热榜！</title>
+    <script src="/static/layui/layui.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2MMZD4NDQK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-2MMZD4NDQK');
+    </script>
+    <script src="/static/js/render.js"></script>
+    <link rel="icon" href="/static/img/favicon.png" />
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/webkit.css">
+
+</head>
+
+<body>
+
+<!-- 导航栏 -->
+<ul class="layui-nav layui-bg-gray" lay-bar="enabled">
+  <li class="layui-nav-item"><a href="/"><img src="/static/img/favicon.png" alt="favicon" style="width: 32px; height: 32px;"></a></li>
+  <li class="layui-nav-item"><a href="http://www.archu.org"><font color='gray'><b>博客</b></font></a></li>
+  <li class="layui-nav-item"><a href="http://chovy.eu.org"><font color='gray'><b>小店</b></font></a></li>
+  <li class="layui-nav-item">
+    <a href="javascript:;"><font color='gray'><b>更多</b></font></a>
+    <dl class="layui-nav-child">
+      <dd><a href="">选项1</a></dd>
+      <dd><a href="">选项2</a></dd>
+      <dd><a href="">选项3</a></dd>
+    </dl>
+  </li>
+</ul>
+
+<div class="container">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space10">
+            <!-- 循环开始 -->
+            {% for site in sites %}
+                <div class="layui-col-md3">
+                  <div class="layui-card">
+                    <div class="layui-card-header">
+                      <img class="sm-img" src="/static/img/{{ site }}.png">
+                      <font size="3" color="#393D49"><b>{{ sites[site] }}</b></font>
+                    </div>
+                    <div class="layui-card-body" id="{{ site }}card">
+                      <ul id="{{ site }}"></ul>
+                    </div>
+                    <div class="layui-card-footer" id="{{ site }}footer">
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{#<script src="/static/js/index.js"></script>#}
+<script>
+    // 创建一个空的 sites 数组
+    let site_list = [];
+
+    // 遍历 sitesdata 并将其放入 sites 数组中
+    for (let site in {{ sites | tojson }}) {
+        // 将每个站点名称添加到 site_list 数组中
+        site_list.push(site);
+    }
+    //开始渲染
+    for (let i = 0; i < site_list.length; i++) {
+        // 在这里调用 render 函数并传递 site_list[i]
+        render(site_list[i]);
+    }
+</script>
+
+</body>
+
+</html>

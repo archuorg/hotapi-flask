@@ -1,7 +1,4 @@
-from datetime import datetime
 import applications.utilis.helper as helper
-
-
 
 def fetch_data():
     filename = "acfun_data_*.data"
@@ -13,10 +10,8 @@ def fetch_data():
             None, "dict")
         num = 1
         data_list = []
-        # 添加更新时间
-        update_time = datetime.now()
         for key in request["rankList"]:
-            data_list.append({"index": num, "update_time": update_time, "title": key["title"], "url": key["shareUrl"], "hot": key["viewCountShow"]})
+            data_list.append({"index": num, "title": key["title"], "url": key["shareUrl"], "hot": key["viewCountShow"]})
             num += 1
         res = helper.end_json_data(json_data, data_list, filename)
         return res

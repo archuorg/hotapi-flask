@@ -11,12 +11,18 @@
 .layui-card-body {
     position: relative;
     padding: 10px 15px;
-    max-height: 370px;
+    max-height: 350px;
     line-height: 24px;
     overflow-x: hidden;
     overflow-y: scroll;
     }
-
+/*底栏*/
+.layui-card-footer {
+    position: relative;
+    color: rgb(118, 124, 130);
+    padding: 10px 15px;
+    line-height: 24px;
+}
 .sm-img{
     margin-top:0px;
     width:25px;

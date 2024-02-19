@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import json
-
+from config import Config
 # 导入模块
 import applications.utilis.helper as helper
 from applications import api
@@ -8,7 +8,11 @@ from applications import api
 
 app = Flask(__name__)
 
-
+# 定义首页路由
+@app.route('/test')
+def test():
+    sites = Config.APIS
+    return render_template('test.html', sites=sites)
 
 # 定义首页路由
 @app.route('/')
@@ -18,8 +22,10 @@ def index():
     visit_count += 1
     # 将新的访问计数写入文件
     helper.set_visit_count(visit_count)
-
-    return render_template('index.html', visit_count=visit_count)
+    sites = Config.APIS
+    return render_template('index.html',
+                           visit_count=visit_count,
+                           sites=sites)
 
 
 @app.route('/api/<string:api_name>')
